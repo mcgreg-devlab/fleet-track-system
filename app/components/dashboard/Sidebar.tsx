@@ -75,24 +75,6 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      {/* User Card */}
-      <div className="bg-white/5 border border-white/10 p-4 rounded-3xl">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center font-bold">
-            JA
-          </div>
-
-          <div>
-            <p className="font-semibold">
-              John Admin
-            </p>
-
-            <p className="text-white/50 text-sm">
-              Administrator
-            </p>
-          </div>
-        </div>
-      </div>
     </aside>
   );
 }
