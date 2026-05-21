@@ -1,12 +1,21 @@
 import Sidebar from "./components/dashboard/Sidebar";
 
+import {
+  Bell,
+  Search,
+  Truck,
+  Package,
+  CheckCircle,
+  Clock3,
+} from "lucide-react";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#f4f7fb] flex">
       <Sidebar />
 
       <section className="flex-1 p-8">
-        {/* Header */}
+        {/* Top Navbar */}
         <div className="flex justify-between items-center mb-10">
           <div>
             <h1 className="text-4xl font-bold text-gray-800">
@@ -18,17 +27,75 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-white px-5 py-3 rounded-2xl shadow-sm border border-gray-100">
-            May 20, 2025
+          <div className="flex items-center gap-4">
+            {/* Search */}
+            <div className="bg-white px-4 py-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3 w-[260px]">
+              <Search size={18} className="text-gray-400" />
+
+              <input
+                type="text"
+                placeholder="Search..."
+                className="outline-none bg-transparent text-sm w-full"
+              />
+            </div>
+
+            {/* Notification */}
+            <button className="w-12 h-12 rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-center">
+              <Bell size={18} />
+            </button>
+
+            {/* Profile */}
+            <div className="bg-white px-4 py-2 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+                MG
+              </div>
+
+              <div>
+                <p className="text-sm font-semibold">
+                  MG Labs
+                </p>
+
+                <p className="text-xs text-gray-500">
+                  Administrator
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
-          <Card title="Total Vehicles" value="24" />
-          <Card title="Vehicles On Trip" value="16" />
-          <Card title="Completed Today" value="8" />
-          <Card title="Pending Deliveries" value="5" />
+          <StatCard
+            title="Total Vehicles"
+            value="24"
+            icon={<Truck size={20} />}
+            color="bg-blue-100 text-blue-600"
+            growth="+12%"
+          />
+
+          <StatCard
+            title="Vehicles On Trip"
+            value="16"
+            icon={<Package size={20} />}
+            color="bg-green-100 text-green-600"
+            growth="+8%"
+          />
+
+          <StatCard
+            title="Completed Today"
+            value="8"
+            icon={<CheckCircle size={20} />}
+            color="bg-purple-100 text-purple-600"
+            growth="+18%"
+          />
+
+          <StatCard
+            title="Pending Deliveries"
+            value="5"
+            icon={<Clock3 size={20} />}
+            color="bg-yellow-100 text-yellow-600"
+            growth="-2%"
+          />
         </div>
 
         {/* Main Grid */}
@@ -201,22 +268,40 @@ export default function Home() {
   );
 }
 
-function Card({
+function StatCard({
   title,
   value,
+  icon,
+  color,
+  growth,
 }: {
   title: string;
   value: string;
+  icon: React.ReactNode;
+  color: string;
+  growth: string;
 }) {
   return (
     <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition">
-      <p className="text-gray-500 text-sm">
-        {title}
-      </p>
+      <div className="flex justify-between items-start">
+        <div>
+          <p className="text-gray-500 text-sm">
+            {title}
+          </p>
 
-      <h2 className="text-5xl font-bold mt-4 text-gray-800">
-        {value}
-      </h2>
+          <h2 className="text-5xl font-bold mt-4 text-gray-800">
+            {value}
+          </h2>
+
+          <p className="text-sm text-green-600 mt-3">
+            {growth} this week
+          </p>
+        </div>
+
+        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${color}`}>
+          {icon}
+        </div>
+      </div>
     </div>
   );
 }
