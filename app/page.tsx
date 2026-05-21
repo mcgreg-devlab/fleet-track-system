@@ -1,3 +1,5 @@
+"use client";
+
 import Sidebar from "./components/dashboard/Sidebar";
 
 import {
@@ -8,6 +10,36 @@ import {
   CheckCircle,
   Clock3,
 } from "lucide-react";
+
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
+
+const tripData = [
+  { day: "Mon", trips: 12 },
+  { day: "Tue", trips: 19 },
+  { day: "Wed", trips: 15 },
+  { day: "Thu", trips: 22 },
+  { day: "Fri", trips: 28 },
+  { day: "Sat", trips: 18 },
+  { day: "Sun", trips: 10 },
+];
+
+const deliveryData = [
+  { name: "Completed", value: 65 },
+  { name: "Pending", value: 20 },
+  { name: "Delayed", value: 15 },
+];
+
+const COLORS = ["#2563eb", "#16a34a", "#dc2626"];
 
 export default function Home() {
   return (
@@ -96,6 +128,72 @@ export default function Home() {
             color="bg-yellow-100 text-yellow-600"
             growth="-2%"
           />
+        </div>
+
+        {/* Charts */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+          {/* Weekly Trips */}
+          <div className="xl:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+            <div className="mb-6">
+              <h2 className="text-2xl font-semibold">
+                Weekly Trips Analytics
+              </h2>
+
+              <p className="text-gray-500 text-sm mt-1">
+                Trips completed over the week
+              </p>
+            </div>
+
+            <div className="h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={tripData}>
+                  <XAxis dataKey="day" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar
+                    dataKey="trips"
+                    fill="#2563eb"
+                    radius={[10, 10, 0, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* Delivery Status */}
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+            <div className="mb-6">
+              <h2 className="text-2xl font-semibold">
+                Delivery Status
+              </h2>
+
+              <p className="text-gray-500 text-sm mt-1">
+                Overall delivery performance
+              </p>
+            </div>
+
+            <div className="h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={deliveryData}
+                    dataKey="value"
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={90}
+                    label
+                  >
+                    {deliveryData.map((entry, index) => (
+                      <Cell
+                        key={index}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
         </div>
 
         {/* Main Grid */}
@@ -389,11 +487,9 @@ function ActivityItem({
 }) {
   return (
     <div className="flex justify-between items-center border-b border-gray-100 pb-4">
-      <div>
-        <p className="font-medium text-sm">
-          {title}
-        </p>
-      </div>
+      <p className="font-medium text-sm">
+        {title}
+      </p>
 
       <p className="text-xs text-gray-400">
         {time}
