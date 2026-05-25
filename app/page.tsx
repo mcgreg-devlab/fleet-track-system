@@ -11,6 +11,17 @@ import {
   Clock3,
 } from "lucide-react";
 
+import CountUp from "react-countup";
+
+import dynamic from "next/dynamic";
+
+const MapView = dynamic(
+  () => import("./components/dashboard/MapView"),
+  {
+    ssr: false,
+  }
+);
+
 import {
   ResponsiveContainer,
   BarChart,
@@ -216,46 +227,9 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="relative h-[500px] rounded-3xl overflow-hidden bg-gradient-to-br from-[#dbeafe] via-[#eff6ff] to-[#dbeafe]">
-              <div className="absolute w-[140%] h-2 bg-white/50 rotate-12 top-[40%] left-[-10%]" />
-              <div className="absolute w-[120%] h-2 bg-white/40 -rotate-6 top-[65%] left-[-10%]" />
-              <div className="absolute w-2 h-[140%] bg-white/30 top-[-10%] left-[50%]" />
-
-              <TruckMarker
-                top="25%"
-                left="30%"
-                truck="TRK-001"
-                status="Moving • 68 km/h"
-                color="green"
-              />
-
-              <TruckMarker
-                top="55%"
-                left="60%"
-                truck="TRK-004"
-                status="Delivering • ETA 25 mins"
-                color="blue"
-              />
-
-              <TruckMarker
-                top="70%"
-                left="20%"
-                truck="TRK-009"
-                status="Stopped • 15 mins"
-                color="red"
-              />
-
-              <div className="absolute bottom-5 right-5 bg-white/95 backdrop-blur-md px-5 py-4 rounded-2xl shadow-lg border border-gray-200">
-                <h3 className="font-bold text-sm mb-3 text-gray-800">
-                  Fleet Status
-                </h3>
-
-                <div className="space-y-2 text-sm text-gray-700">
-                  <LegendItem color="bg-green-500" label="Moving" />
-                  <LegendItem color="bg-blue-500" label="Delivering" />
-                  <LegendItem color="bg-red-500" label="Stopped" />
-                </div>
-              </div>
+            {/* REAL INTERACTIVE MAP */}
+            <div className="h-[500px] rounded-3xl overflow-hidden border border-gray-200">
+              <MapView />
             </div>
           </div>
 
@@ -402,68 +376,6 @@ export default function Home() {
   );
 }
 
-function TruckMarker({
-  top,
-  left,
-  truck,
-  status,
-  color,
-}: {
-  top: string;
-  left: string;
-  truck: string;
-  status: string;
-  color: string;
-}) {
-  const colorMap: Record<string, string> = {
-    green: "bg-green-500",
-    blue: "bg-blue-500",
-    red: "bg-red-500",
-  };
-
-  return (
-    <div
-      className="absolute transition-all duration-300 hover:scale-105"
-      style={{ top, left }}
-    >
-      <div className="relative">
-        <div
-          className={`absolute inset-0 rounded-full animate-ping opacity-75 ${colorMap[color]}`}
-        />
-
-        <div
-          className={`relative w-5 h-5 rounded-full border-4 border-white shadow-lg ${colorMap[color]}`}
-        />
-      </div>
-
-      <div className="mt-3 bg-white px-3 py-2 rounded-xl shadow-md border border-gray-200">
-        <p className="font-semibold text-sm text-gray-800">
-          {truck}
-        </p>
-
-        <p className="text-xs text-gray-700">
-          {status}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function LegendItem({
-  color,
-  label,
-}: {
-  color: string;
-  label: string;
-}) {
-  return (
-    <div className="flex items-center gap-2">
-      <div className={`w-3 h-3 rounded-full ${color}`} />
-      <span>{label}</span>
-    </div>
-  );
-}
-
 function StatCard({
   title,
   value,
@@ -486,7 +398,10 @@ function StatCard({
           </p>
 
           <h2 className="text-5xl font-bold mt-4 text-gray-800">
-            {value}
+            <CountUp
+              end={Number(value)}
+              duration={2}
+            />
           </h2>
 
           <p className="text-sm text-green-700 mt-3 font-medium">
