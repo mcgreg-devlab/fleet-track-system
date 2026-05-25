@@ -61,7 +61,7 @@ export default function Home() {
 
           <div className="flex items-center gap-4">
             {/* Search */}
-            <div className="bg-white px-4 py-3 rounded-2xl shadow-sm border border-gray-200 flex items-center gap-3 w-[260px]">
+            <div className="bg-white px-4 py-3 rounded-2xl shadow-sm border border-gray-200 flex items-center gap-3 w-[260px] transition-all duration-300 hover:shadow-md">
               <Search size={18} className="text-gray-600" />
 
               <input
@@ -72,12 +72,12 @@ export default function Home() {
             </div>
 
             {/* Notification */}
-            <button className="w-12 h-12 rounded-2xl bg-white border border-gray-200 shadow-sm flex items-center justify-center text-gray-700">
+            <button className="w-12 h-12 rounded-2xl bg-white border border-gray-200 shadow-sm flex items-center justify-center text-gray-700 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
               <Bell size={18} />
             </button>
 
             {/* Profile */}
-            <div className="bg-white px-4 py-2 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-3">
+            <div className="bg-white px-4 py-2 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-3 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
               <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
                 MG
               </div>
@@ -133,7 +133,7 @@ export default function Home() {
         {/* Charts */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
           {/* Weekly Trips */}
-          <div className="xl:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-gray-200">
+          <div className="xl:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
                 Weekly Trips Analytics
@@ -161,7 +161,7 @@ export default function Home() {
           </div>
 
           {/* Delivery Status */}
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-200">
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
                 Delivery Status
@@ -199,7 +199,7 @@ export default function Home() {
         {/* Main Grid */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           {/* Live Map */}
-          <div className="xl:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-gray-200">
+          <div className="xl:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
             <div className="flex justify-between items-center mb-6">
               <div>
                 <h2 className="text-2xl font-bold text-gray-800">
@@ -211,7 +211,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <button className="border border-gray-300 px-4 py-2 rounded-xl hover:bg-gray-100 transition text-gray-700 font-medium">
+              <button className="border border-gray-300 px-4 py-2 rounded-xl hover:bg-gray-100 transition-all duration-300 text-gray-700 font-medium hover:shadow-md">
                 Expand Map
               </button>
             </div>
@@ -260,13 +260,13 @@ export default function Home() {
           </div>
 
           {/* Active Trips */}
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-200">
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
                 Active Trips
               </h2>
 
-              <button className="text-blue-700 text-sm font-medium">
+              <button className="text-blue-700 text-sm font-medium hover:underline">
                 View All
               </button>
             </div>
@@ -302,13 +302,13 @@ export default function Home() {
         {/* Bottom Widgets */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-8">
           {/* Deliveries */}
-          <div className="xl:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-gray-200">
+          <div className="xl:col-span-2 bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
                 Recent Deliveries
               </h2>
 
-              <button className="text-blue-700 text-sm font-medium">
+              <button className="text-blue-700 text-sm font-medium hover:underline">
                 View All
               </button>
             </div>
@@ -358,13 +358,13 @@ export default function Home() {
           </div>
 
           {/* Activity */}
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-200">
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
                 Recent Activity
               </h2>
 
-              <button className="text-blue-700 text-sm font-medium">
+              <button className="text-blue-700 text-sm font-medium hover:underline">
                 View All
               </button>
             </div>
@@ -422,11 +422,18 @@ function TruckMarker({
   };
 
   return (
-    <div className="absolute" style={{ top, left }}>
+    <div
+      className="absolute transition-all duration-300 hover:scale-105"
+      style={{ top, left }}
+    >
       <div className="relative">
-        <div className={`absolute inset-0 rounded-full animate-ping opacity-75 ${colorMap[color]}`} />
+        <div
+          className={`absolute inset-0 rounded-full animate-ping opacity-75 ${colorMap[color]}`}
+        />
 
-        <div className={`relative w-5 h-5 rounded-full border-4 border-white shadow-lg ${colorMap[color]}`} />
+        <div
+          className={`relative w-5 h-5 rounded-full border-4 border-white shadow-lg ${colorMap[color]}`}
+        />
       </div>
 
       <div className="mt-3 bg-white px-3 py-2 rounded-xl shadow-md border border-gray-200">
@@ -471,7 +478,7 @@ function StatCard({
   growth: string;
 }) {
   return (
-    <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-200 hover:shadow-md transition">
+    <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
       <div className="flex justify-between items-start">
         <div>
           <p className="text-gray-700 text-sm font-medium">
@@ -487,7 +494,9 @@ function StatCard({
           </p>
         </div>
 
-        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${color}`}>
+        <div
+          className={`w-12 h-12 rounded-2xl flex items-center justify-center ${color}`}
+        >
           {icon}
         </div>
       </div>
@@ -505,7 +514,7 @@ function TripCard({
   status: string;
 }) {
   return (
-    <div className="border border-gray-200 rounded-2xl p-4 hover:shadow-md transition">
+    <div className="border border-gray-200 rounded-2xl p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-white">
       <div className="flex justify-between items-center">
         <div>
           <h3 className="font-bold text-lg text-gray-800">
@@ -543,7 +552,7 @@ function DeliveryRow({
   status: string;
 }) {
   return (
-    <tr className="border-b border-gray-100">
+    <tr className="border-b border-gray-100 hover:bg-gray-50 transition-all duration-300">
       <td className="py-4 font-medium text-gray-800">{trip}</td>
       <td className="text-gray-700">{driver}</td>
       <td className="text-gray-700">{destination}</td>
@@ -573,7 +582,7 @@ function ActivityItem({
   time: string;
 }) {
   return (
-    <div className="flex justify-between items-center border-b border-gray-100 pb-4">
+    <div className="flex justify-between items-center border-b border-gray-100 pb-4 transition-all duration-300 hover:translate-x-1">
       <p className="font-medium text-sm text-gray-800">
         {title}
       </p>
